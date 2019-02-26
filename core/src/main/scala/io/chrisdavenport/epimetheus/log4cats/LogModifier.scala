@@ -17,6 +17,11 @@ sealed abstract class LogModifer[F[_]]{
 
 object LogTransformer {
 
+  /**
+   * Register a LogTransformer with the CollectorRegistry that can
+   * modify loggers such that their logging will be reflected
+   * in the registry.
+   */
   def register[F[_]: Sync](cr: CollectorRegistry[F], name: Name = Name("log4cats_total")): F[LogModifer[F]] = {
     for {
       counter <- Counter.labelled(
@@ -28,6 +33,28 @@ object LogTransformer {
       )
     } yield new MeteredLogTransformer[F](counter)
   }
+
+  /**
+   * Convenience Constructor for when you only want to
+   * modify a single SelfAwareLogger
+   */
+  def selfAware[F[_]: Sync](
+    cr: CollectorRegistry[F],
+    name: Name = Name("log4cats_total"),
+    selfAware: SelfAwareLogger[F]
+  ): F[SelfAwareLogger[F]] = 
+    register(cr, name).map(_.selfAware(selfAware))
+
+  /**
+   * Convenience Constructor for when you only want to
+   * modify a single SelfAwareStructuredLogger
+   */
+  def selfAwareStructured[F[_]: Sync](
+    cr: CollectorRegistry[F],
+    name: Name = Name("log4cats_total"),
+    selfAware: SelfAwareStructuredLogger[F]
+  ): F[SelfAwareStructuredLogger[F]] = 
+    register(cr, name).map(_.selfAwareStructured(selfAware))
 
   private def reportLevel(l: LogLevel): String = l match {
     case Error => "error"
