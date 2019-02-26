@@ -1,0 +1,11 @@
+name: epimetheus-log4cats
+baseurl: /epimetheus-log4cats
+description: Epimetheus Log4cats Metrics
+highlighter: rouge
+docs: true
+collections:
+  tut:
+    output: true
+version: 0.0.2-SNAPSHOT
+org: io.chrisdavenport
+markdown: kramdown
