@@ -9,20 +9,20 @@ import io.chrisdavenport.log4cats.extras.LogLevel
 import io.chrisdavenport.log4cats.extras.LogLevel._
 import shapeless._
 
-sealed abstract class LogModifer[F[_]]{
+sealed abstract class LogModifier[F[_]]{
   def selfAware(s: SelfAwareLogger[F]): SelfAwareLogger[F]
   def selfAwareStructured(s: SelfAwareStructuredLogger[F]): SelfAwareStructuredLogger[F]
 }
 
 
-object LogTransformer {
+object LogModifier {
 
   /**
    * Register a LogTransformer with the CollectorRegistry that can
    * modify loggers such that their logging will be reflected
    * in the registry.
    */
-  def register[F[_]: Sync](cr: CollectorRegistry[F], name: Name = Name("log4cats_total")): F[LogModifer[F]] = {
+  def register[F[_]: Sync](cr: CollectorRegistry[F], name: Name = Name("log4cats_total")): F[LogModifier[F]] = {
     for {
       counter <- Counter.labelled(
         cr, 
@@ -40,8 +40,8 @@ object LogTransformer {
    */
   def selfAware[F[_]: Sync](
     cr: CollectorRegistry[F],
-    name: Name = Name("log4cats_total"),
-    selfAware: SelfAwareLogger[F]
+    selfAware: SelfAwareLogger[F],
+    name: Name = Name("log4cats_total")
   ): F[SelfAwareLogger[F]] = 
     register(cr, name).map(_.selfAware(selfAware))
 
@@ -51,8 +51,8 @@ object LogTransformer {
    */
   def selfAwareStructured[F[_]: Sync](
     cr: CollectorRegistry[F],
-    name: Name = Name("log4cats_total"),
-    selfAware: SelfAwareStructuredLogger[F]
+    selfAware: SelfAwareStructuredLogger[F],
+    name: Name = Name("log4cats_total")
   ): F[SelfAwareStructuredLogger[F]] = 
     register(cr, name).map(_.selfAwareStructured(selfAware))
 
@@ -66,7 +66,7 @@ object LogTransformer {
 
   private class MeteredLogTransformer[F[_]](
     val c: UnlabelledCounter[F, LogLevel]
-  )(implicit F: Monad[F]) extends LogModifer[F]{
+  )(implicit F: Monad[F]) extends LogModifier[F]{
     def selfAware(s: SelfAwareLogger[F]): SelfAwareLogger[F] = 
       new MeteredSelfAwareLogger[F](s, c)
     def selfAwareStructured(s: SelfAwareStructuredLogger[F]): SelfAwareStructuredLogger[F] =
