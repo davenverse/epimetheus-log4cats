@@ -28,7 +28,7 @@ object LogModifier {
         cr, 
         name,
         "Log4cats Log Totals.",
-        Sized(Name("level")),
+        Sized(Label("level")),
         {l: LogLevel => Sized(reportLevel(l))}
       )
     } yield new MeteredLogTransformer[F](counter)
