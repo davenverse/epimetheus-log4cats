@@ -2,7 +2,7 @@ import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
 lazy val `epimetheus-log4cats` = project.in(file("."))
   .settings(commonSettings, releaseSettings, skipOnPublishSettings)
-  .aggregate(core, docs)
+  .aggregate(core)
 
 lazy val core = project.in(file("core"))
   .settings(commonSettings, releaseSettings, mimaSettings)
@@ -20,26 +20,25 @@ lazy val contributors = Seq(
   "ChristopherDavenport" -> "Christopher Davenport"
 )
 
-val epimetheusV = "0.2.2"
+val epimetheusV = "0.3.0-RC1"
 
-val catsV = "1.6.1"
-val catsEffectV = "1.4.0"
+val catsV = "2.0.0-RC1"
+val catsEffectV = "2.0.0-RC1"
 val shapelessV = "2.3.3"
 
-val log4catsV = "0.3.0"
+val log4catsV = "1.0.0-RC1"
 
 val specs2V = "4.7.0"
 
-val kindProjectorV = "0.9.10"
+val kindProjectorV = "0.10.3"
 val betterMonadicForV = "0.3.1"
 
 // General Settings
 lazy val commonSettings = Seq(
   organization := "io.chrisdavenport",
 
-  scalaVersion := "2.12.8",
-  crossScalaVersions := Seq(scalaVersion.value, "2.11.12"),
-  scalacOptions += "-Yrangepos",
+  scalaVersion := "2.13.0",
+  crossScalaVersions := Seq(scalaVersion.value, "2.12.8"),
 
   scalacOptions in (Compile, doc) ++= Seq(
       "-groups",
@@ -47,7 +46,7 @@ lazy val commonSettings = Seq(
       "-doc-source-url", "https://github.com/ChristopherDavenport/epimetheus-log4cats/blob/v" + version.value + "€{FILE_PATH}.scala"
   ),
 
-  addCompilerPlugin("org.spire-math" % "kind-projector" % kindProjectorV cross CrossVersion.binary),
+  addCompilerPlugin("org.typelevel" % "kind-projector" % kindProjectorV cross CrossVersion.binary),
   addCompilerPlugin("com.olegpy" %% "better-monadic-for" % betterMonadicForV),
   libraryDependencies ++= Seq(
     "io.chrisdavenport"           %% "epimetheus"                 % epimetheusV,
@@ -58,7 +57,6 @@ lazy val commonSettings = Seq(
     "com.chuusai"                 %% "shapeless"                  % shapelessV,
 
     "io.chrisdavenport"           %% "log4cats-core"              % log4catsV,
-    "io.chrisdavenport"           %% "log4cats-extras"            % log4catsV,
     "io.chrisdavenport"           %% "log4cats-testing"           % log4catsV     % Test,
 
     "org.specs2"                  %% "specs2-core"                % specs2V       % Test,
