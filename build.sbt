@@ -27,7 +27,7 @@ val catsV = "2.0.0-RC2"
 val catsEffectV = "2.0.0-RC2"
 val shapelessV = "2.3.3"
 
-val log4catsV = "1.0.0-RC3"
+val log4catsV = "1.0.0"
 
 val specs2V = "4.7.0"
 
