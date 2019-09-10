@@ -23,8 +23,8 @@ lazy val contributors = Seq(
 
 val epimetheusV = "0.3.0-RC3"
 
-val catsV = "2.0.0-RC2"
-val catsEffectV = "2.0.0-RC2"
+val catsV = "2.0.0"
+val catsEffectV = "2.0.0"
 val shapelessV = "2.3.3"
 
 val log4catsV = "1.0.0-RC3"
