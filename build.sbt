@@ -21,7 +21,7 @@ lazy val contributors = Seq(
   "ChristopherDavenport" -> "Christopher Davenport"
 )
 
-val epimetheusV = "0.3.0-RC3"
+val epimetheusV = "0.3.0"
 
 val catsV = "2.0.0-RC2"
 val catsEffectV = "2.0.0-RC2"
