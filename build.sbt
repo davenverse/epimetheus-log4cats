@@ -29,7 +29,7 @@ val shapelessV = "2.3.3"
 
 val log4catsV = "1.0.0-RC3"
 
-val specs2V = "4.7.0"
+val specs2V = "4.7.1"
 
 val kindProjectorV = "0.10.3"
 val betterMonadicForV = "0.3.1"
