@@ -21,15 +21,15 @@ lazy val contributors = Seq(
   "ChristopherDavenport" -> "Christopher Davenport"
 )
 
-val epimetheusV = "0.3.0"
+val epimetheusV = "0.4.0"
 
-val catsV = "2.0.0"
+val catsV = "2.1.0"
 val catsEffectV = "2.1.1"
 val shapelessV = "2.3.3"
 
 val log4catsV = "1.0.1"
 
-val specs2V = "4.8.2"
+val specs2V = "4.8.3"
 
 val kindProjectorV = "0.11.0"
 val betterMonadicForV = "0.3.1"
