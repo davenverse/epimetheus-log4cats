@@ -2,7 +2,7 @@ package io.chrisdavenport.epimetheus
 package log4cats
 
 import cats._
-import cats.implicits._
+import cats.syntax.all._
 import cats.effect._
 import io.chrisdavenport.log4cats._
 import io.chrisdavenport.log4cats.extras.LogLevel
