@@ -4,9 +4,9 @@ package log4cats
 import cats._
 import cats.implicits._
 import cats.effect._
-import io.chrisdavenport.log4cats._
-import io.chrisdavenport.log4cats.extras.LogLevel
-import io.chrisdavenport.log4cats.extras.LogLevel._
+import org.typelevel.log4cats._
+import org.typelevel.log4cats.extras.LogLevel
+import org.typelevel.log4cats.extras.LogLevel._
 import shapeless._
 
 sealed abstract class LogModifier[F[_]]{
