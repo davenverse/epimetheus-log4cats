@@ -7,7 +7,6 @@ import cats.effect._
 import org.typelevel.log4cats._
 import org.typelevel.log4cats.extras.LogLevel
 import org.typelevel.log4cats.extras.LogLevel._
-import shapeless._
 
 sealed abstract class LogModifier[F[_]]{
   def selfAware(s: SelfAwareLogger[F]): SelfAwareLogger[F]
@@ -29,7 +28,7 @@ object LogModifier {
         name,
         "Log4cats Log Totals.",
         Sized(Label("level")),
-        {l: LogLevel => Sized(reportLevel(l))}
+        {(l: LogLevel) => Sized(reportLevel(l))}
       )
     } yield new MeteredLogTransformer[F](counter)
   }
