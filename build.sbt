@@ -4,11 +4,11 @@ ThisBuild / crossScalaVersions := Seq("2.12.14", "2.13.6", "3.0.1")
 
 val epimetheusV = "0.5.0-M2"
 val catsV = "2.7.0"
-val catsEffectV = "3.2.1"
+val catsEffectV = "3.2.9"
 
 val log4catsV = "2.2.0"
 
-val specs2V = "4.12.12"
+val specs2V = "4.15.0"
 
 lazy val `epimetheus-log4cats` = project.in(file("."))
   .disablePlugins(MimaPlugin)
