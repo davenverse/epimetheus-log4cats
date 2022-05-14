@@ -146,7 +146,7 @@ object LogModifier {
         isDebugEnabled.ifM(c.label(Debug).inc, F.unit)
     def error(message: => String): F[Unit] = 
       l.error(message) >>
-        isDebugEnabled.ifM(c.label(Error).inc, F.unit)
+        isErrorEnabled.ifM(c.label(Error).inc, F.unit)
     def info(message: => String): F[Unit] = 
       l.info(message) >>
         isInfoEnabled.ifM(c.label(Info).inc, F.unit)
