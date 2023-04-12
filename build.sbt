@@ -6,7 +6,7 @@ val epimetheusV = "0.5.0-M2"
 val catsV = "2.7.0"
 val catsEffectV = "3.3.12"
 
-val log4catsV = "2.3.1"
+val log4catsV = "2.3.2"
 
 val specs2V = "4.15.0"
 
