@@ -1,14 +1,14 @@
 import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
-ThisBuild / crossScalaVersions := Seq("2.12.14", "2.13.6", "3.0.1")
+ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.8", "3.2.2")
 
 val epimetheusV = "0.5.0"
-val catsV = "2.7.0"
-val catsEffectV = "3.3.12"
+val catsV = "2.9.0"
+val catsEffectV = "3.3.14"
 
-val log4catsV = "2.3.1"
+val log4catsV = "2.3.2"
 
-val specs2V = "4.15.0"
+val specs2V = "4.20.0"
 
 lazy val `epimetheus-log4cats` = project.in(file("."))
   .disablePlugins(MimaPlugin)
