@@ -8,7 +8,7 @@ val catsEffectV = "3.3.14"
 
 val log4catsV = "2.3.2"
 
-val specs2V = "4.20.0"
+val specs2V = "4.20.1"
 
 lazy val `epimetheus-log4cats` = project.in(file("."))
   .disablePlugins(MimaPlugin)
