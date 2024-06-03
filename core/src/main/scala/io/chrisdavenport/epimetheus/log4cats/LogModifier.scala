@@ -21,7 +21,7 @@ object LogModifier {
    * modify loggers such that their logging will be reflected
    * in the registry.
    */
-  def register[F[_]: Sync](cr: CollectorRegistry[F], name: Name = Name("log4cats_total")): F[LogModifier[F]] = {
+  def register[F[_]: Sync](cr: PrometheusRegistry[F], name: Name = Name("log4cats")): F[LogModifier[F]] = {
     for {
       counter <- Counter.labelled(
         cr, 
@@ -38,9 +38,9 @@ object LogModifier {
    * modify a single SelfAwareLogger
    */
   def selfAware[F[_]: Sync](
-    cr: CollectorRegistry[F],
+    cr: PrometheusRegistry[F],
     selfAware: SelfAwareLogger[F],
-    name: Name = Name("log4cats_total")
+    name: Name = Name("log4cats")
   ): F[SelfAwareLogger[F]] = 
     register(cr, name).map(_.selfAware(selfAware))
 
@@ -49,9 +49,9 @@ object LogModifier {
    * modify a single SelfAwareStructuredLogger
    */
   def selfAwareStructured[F[_]: Sync](
-    cr: CollectorRegistry[F],
+    cr: PrometheusRegistry[F],
     selfAware: SelfAwareStructuredLogger[F],
-    name: Name = Name("log4cats_total")
+    name: Name = Name("log4cats")
   ): F[SelfAwareStructuredLogger[F]] = 
     register(cr, name).map(_.selfAwareStructured(selfAware))
 
