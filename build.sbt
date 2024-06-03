@@ -1,6 +1,6 @@
 import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
-ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.12", "3.3.3")
+ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.14", "3.3.3")
 
 val epimetheusV = "0.6.0-M3"
 val catsV = "2.9.0"
