@@ -1,6 +1,38 @@
-import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
+ThisBuild / tlBaseVersion := "0.6" // current series x.y
 
-ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.12", "3.3.3")
+ThisBuild / organization := "io.chrisdavenport"
+ThisBuild / organizationName := "Christopher Davenport"
+ThisBuild / startYear := Some(2022)
+ThisBuild / licenses := Seq(License.MIT)
+ThisBuild / developers := List(
+  tlGitHubDev("christopherdavenport", "Christopher Davenport")
+)
+
+// sbt-davenverse published a snapshot from main on every push; preserve that.
+ThisBuild / tlCiReleaseBranches := Seq("main")
+
+val Scala213tl = "2.13.18"
+ThisBuild / crossScalaVersions := Seq("2.12.20", Scala213tl, "3.3.8")
+ThisBuild / scalaVersion := Scala213tl
+
+// Compiler settings DavenversePlugin injected globally. sbt-typelevel-ci-release
+// does not supply these (only sbt-typelevel-settings would). Scoped to ThisBuild
+// so every project picks them up without editing each one.
+ThisBuild / libraryDependencies ++= (CrossVersion.partialVersion(scalaVersion.value) match {
+  case Some((2, _)) =>
+    Seq(
+      compilerPlugin("org.typelevel" % "kind-projector" % "0.13.4" cross CrossVersion.full),
+      compilerPlugin("com.olegpy" %% "better-monadic-for" % "0.3.1")
+    )
+  case _ => Nil
+})
+ThisBuild / scalacOptions ++= (CrossVersion.partialVersion(scalaVersion.value) match {
+  case Some((3, _)) => Seq("-Ykind-projector")
+  case Some((2, 12)) => Seq("-Ypartial-unification")
+  case _ => Nil
+})
+
+
 
 val epimetheusV = "0.6.0-M3"
 val catsV = "2.9.0"
@@ -11,8 +43,7 @@ val log4catsV = "2.3.2"
 val specs2V = "4.20.0"
 
 lazy val `epimetheus-log4cats` = project.in(file("."))
-  .disablePlugins(MimaPlugin)
-  .enablePlugins(NoPublishPlugin)
+    .enablePlugins(NoPublishPlugin)
   .aggregate(core)
 
 lazy val core = project.in(file("core"))
@@ -33,12 +64,17 @@ lazy val core = project.in(file("core"))
   )
 
 lazy val site = project.in(file("site"))
-  .disablePlugins(MimaPlugin)
-  .enablePlugins(NoPublishPlugin)
-  .enablePlugins(DavenverseMicrositePlugin)
+    .enablePlugins(NoPublishPlugin)
+  .enablePlugins(TypelevelSitePlugin)
+  .settings(
+    laikaTheme := tlSiteHelium.value.site
+      .topNavigationBar(
+        homeLink = laika.helium.config.IconLink.internal(laika.ast.Path.Root / "index.md", laika.helium.config.HeliumIcon.home)
+      )
+      .build
+  )
   .dependsOn(core)
   .settings(
-    micrositeDescription := "Epimetheus Log4cats Metrics",
   )
 
 
