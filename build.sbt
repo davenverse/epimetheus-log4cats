@@ -35,7 +35,7 @@ ThisBuild / scalacOptions ++= (CrossVersion.partialVersion(scalaVersion.value) m
 
 
 
-val epimetheusV = "0.7.0"
+val epimetheusV = "0.7.1"
 val catsV = "2.13.0"
 val catsEffectV = "3.7.1"
 
