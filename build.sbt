@@ -1,4 +1,4 @@
-ThisBuild / tlBaseVersion := "0.6" // current series x.y
+ThisBuild / tlBaseVersion := "0.7" // current series x.y
 
 ThisBuild / organization := "io.chrisdavenport"
 ThisBuild / organizationName := "Christopher Davenport"
@@ -13,7 +13,7 @@ ThisBuild / developers := List(
 ThisBuild / tlCiReleaseBranches := Seq()
 
 val Scala213tl = "2.13.18"
-ThisBuild / crossScalaVersions := Seq("2.12.20",  Scala213tl, "3.3.8")
+ThisBuild / crossScalaVersions := Seq(Scala213tl, "3.3.8")
 ThisBuild / scalaVersion := Scala213tl
 
 // Compiler settings DavenversePlugin injected globally. sbt-typelevel-ci-release
@@ -35,11 +35,11 @@ ThisBuild / scalacOptions ++= (CrossVersion.partialVersion(scalaVersion.value) m
 
 
 
-val epimetheusV = "0.6.0-M3"
-val catsV = "2.9.0"
-val catsEffectV = "3.3.14"
+val epimetheusV = "0.7.1"
+val catsV = "2.13.0"
+val catsEffectV = "3.7.1"
 
-val log4catsV = "2.3.2"
+val log4catsV = "2.8.0"
 
 val specs2V = "4.20.0"
 
